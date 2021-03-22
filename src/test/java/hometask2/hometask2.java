@@ -5,8 +5,8 @@ import org.junit.jupiter.api.Test;
 
 import java.io.File;
 
-import static com.codeborne.selenide.Condition.text;
-import static com.codeborne.selenide.Condition.visible;
+import static com.codeborne.selenide.Condition.*;
+import static com.codeborne.selenide.Condition.cssValue;
 import static com.codeborne.selenide.Selenide.*;
 
 public class hometask2 {
@@ -112,6 +112,25 @@ public class hometask2 {
 
         $("#closeLargeModal").scrollTo().click();
         $("#example-modal-sizes-title-lg").shouldNot(visible);
+
+    }
+
+    @Test
+    void validationCheck(){
+
+        String colorRed = "rgb(220, 53, 69)";
+        String colorRedRadio = "rgba(220, 53, 69, 1)";
+
+        open(demoqaCom+testFormPage);
+        $("#submit").scrollTo().click();
+
+        firstNameField.shouldHave(cssValue("border-color", colorRed));
+        lastNameField.shouldHave(cssValue("border-color", colorRed));
+        mobileNumberField.shouldHave(cssValue("border-color", colorRed));
+
+        $x("//div//label[.='Male']").shouldHave(cssValue("color", colorRedRadio));
+        $x("//div//label[.='Female']").shouldHave(cssValue("color", colorRedRadio));
+        $x("//div//label[.='Other']").shouldHave(cssValue("color", colorRedRadio));
 
     }
 
