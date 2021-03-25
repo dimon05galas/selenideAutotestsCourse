@@ -32,5 +32,6 @@ test {
         junitXml.enabled = false
         html.enabled = true
     }
+
 }
 
