@@ -1,9 +1,6 @@
 package hometask5;
 
-import io.qameta.allure.Feature;
-import io.qameta.allure.Link;
-import io.qameta.allure.Owner;
-import io.qameta.allure.Story;
+import io.qameta.allure.*;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Tags;
@@ -20,6 +17,8 @@ public class hometask5 {
     private static final String REPOSITORY = "eroshenkoam/allure-example";
     private static final String ISSUE_NUMBER = "#68";
     private static final String BASE_URL = "https://github.com/";
+
+    public BaseSteps steps = new BaseSteps();
 
     @Test
     @DisplayName("Поиск Issue по номеру в репозитории (чистый Selenide)")
@@ -38,7 +37,7 @@ public class hometask5 {
     @Test
     @DisplayName("Поиск Issue по номеру в репозитории (лямбда-степы)")
     @Owner("Dmitry Galas")
-    @Link(BASE_URL)
+    @Link(name = "BASE_URL", value = BASE_URL)
     @Feature("Issues")
     @Story("Поиск Issue по номеру в репозитории")
     public void issueSearchingSteps(){
@@ -48,7 +47,7 @@ public class hometask5 {
             open(BASE_URL);
         });
 
-        step("Поиски открытие репозитория" + REPOSITORY, () -> {
+        step("Поиск и открытие репозитория" + REPOSITORY, () -> {
             $(byName("q")).setValue(REPOSITORY).pressEnter();
             $(By.linkText(REPOSITORY)).click();
         });
@@ -61,5 +60,28 @@ public class hometask5 {
             $(withText(ISSUE_NUMBER)).shouldBe(exist);
         });
     }
+
+
+    @Test
+    @DisplayName("Поиск Issue по номеру в репозитории (Стэпы с аннотациями)")
+    @Owner("Dmitry Galas")
+    @Link(name = "BASE_URL", value = BASE_URL)
+    @Feature("Issues")
+    @Story("Поиск Issue по номеру в репозитории")
+    public void issueSearchingStepsAnnotations(){
+        parameter("Repository", REPOSITORY);
+        parameter("Issue number", ISSUE_NUMBER);
+
+        steps.openMainPage();
+        steps.seatchAndOpenRepository(REPOSITORY);
+        steps.openRepositoryIssues();
+        steps.issueWithNumberExistent(ISSUE_NUMBER);
+
+
+    }
+
+
+
+
 
 }
