@@ -23,14 +23,27 @@ public class hometask3 {
         $x("//span[@itemprop='author']/a").shouldHave(text("selenide"));
         $x("//strong[@itemprop='name']/a").shouldHave(text("selenide"));
 
-        $x("//li[@class='d-flex']//span[.='Wiki']//parent::a").click();
-        $x("//ul[@data-filterable-for='wiki-pages-filter']").$(byText("SoftAssertions")).shouldBe(enabled);
+        $("#wiki-tab").click();
+        $("#wiki-pages-filter").setValue("SoftAssertions");
+        $x("//summary//a[.='SoftAssertions']").shouldBe(visible);
 
         $x("//ul[@data-filterable-for='wiki-pages-filter']").$(byText("SoftAssertions")).scrollTo().click();
 //        $(withText("JUnit5 extension - ")).shouldBe(exist);
         $(withText("com.codeborne.selenide.junit5.SoftAssertsExtension")).shouldBe(exist);
 
         $(withText("Using JUnit5 extend test class:")).shouldBe(exist);
+    }
+
+    @Test
+    void firstContributorShouldBeSolntcev(){
+        open("https://github.com/selenide/selenide");
+
+        //$(".BorderGrid").$(byText("Contributors")).closest("div").$("ul li").shouldBe(visible);
+        $x("//h2//a[contains(text(),'Contributors')]/ancestor::div[1]//li[1]/a").shouldHave(attribute("href", "https://github.com/asolntsev"));
+        $x("//h2//a[contains(text(),'Contributors')]/ancestor::div[1]//li[1]/a").hover();
+
+       // $x("//div[contains(@class, 'Popover-message')]//a[.='Andrei Solntsev']").shouldBe(visible);
+        $$(".Popover-message").findBy(visible).shouldHave(text("Andrei Solntsev"));
     }
 
     @Test
@@ -44,8 +57,8 @@ public class hometask3 {
         columnB.shouldHave(text("B"));
 
         sleep(3000);
-        actions().moveToElement(columnA).clickAndHold().moveByOffset(200,0).release().perform();
-        //actions().dragAndDropBy(columnA, 200, 0).perform();
+        //actions().moveToElement(columnA).clickAndHold().moveByOffset(200,0).release().perform();
+        actions().dragAndDropBy(columnA, 200, 0).perform();
 
         columnA.shouldHave(text("B"));
         columnA.shouldHave(text("A"));
