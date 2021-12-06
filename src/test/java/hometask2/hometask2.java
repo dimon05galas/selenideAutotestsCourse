@@ -83,8 +83,9 @@ public class hometask2 {
 
         $("#subjectsInput").setValue("Maths").pressEnter();
         $("#subjectsInput").setValue("Arts").pressEnter();
-        $("#subjectsInput").setValue("En");
-        $x("//div[contains(@class, 'subjects-auto-complete__menu')]//div[.='English']").click();
+        $("#subjectsInput").setValue("En").pressEnter();
+        $x("//div[@id='subjectsContainer']//div[.='English']").shouldBe(visible);
+
         $x("//div[@id='hobbiesWrapper']//label[.='Sports']/parent::div[1]").click();
         $x("//div[@id='hobbiesWrapper']//label[.='Music']/parent::div[1]").click();
 
