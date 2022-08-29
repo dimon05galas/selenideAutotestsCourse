@@ -15,13 +15,13 @@ import static io.qameta.allure.Allure.step;
 
 public class hometask5 {
     private static final String REPOSITORY = "eroshenkoam/allure-example";
-    private static final String ISSUE_NUMBER = "#68";
+    private static final String ISSUE_NUMBER = "#80";
     private static final String BASE_URL = "https://github.com/";
 
     public BaseSteps steps = new BaseSteps();
 
     @Test
-    @DisplayName("Поиск Issue по номеру в репозитории (чистый Selenide)")
+    @DisplayName("Find Issue by number in REPO (just Selenide)")
     @Owner("Dmitry Galas")
     @Tags({@Tag("web"), @Tag("critical")})
     public void issueSearchingSelenide(){
@@ -29,7 +29,7 @@ public class hometask5 {
         open(BASE_URL);
         $(byName("q")).setValue(REPOSITORY).pressEnter();
         $(By.linkText(REPOSITORY)).click();
-        $(".UnderlineNav-body").$(byText("Issues")).click();
+        $("#issues-tab").click();
         $(withText(ISSUE_NUMBER)).shouldBe(exist);
 
     }
@@ -53,7 +53,7 @@ public class hometask5 {
         });
 
         step("Переход в раздел Issues", () ->{
-            $(".UnderlineNav-body").$(byText("Issues")).click();
+            $("#issues-tab").click();
         });
 
         step("Поиск Issue с номером "+ ISSUE_NUMBER, () ->{

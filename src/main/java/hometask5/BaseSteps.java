@@ -27,7 +27,8 @@ public class BaseSteps {
 
     @Step("Переход в раздел Issues")
     public void openRepositoryIssues() {
-        $(".UnderlineNav-body").$(byText("Issues")).click();
+        $("#issues-tab").click();
+
     };
 
     @Step("Issue с номером {number} существует")
