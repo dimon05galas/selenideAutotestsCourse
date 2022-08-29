@@ -1,11 +1,15 @@
 package hometask5;
 
-import io.qameta.allure.*;
+
+import io.qameta.allure.Step;
 import org.openqa.selenium.By;
 
 import static com.codeborne.selenide.Condition.exist;
 import static com.codeborne.selenide.Selectors.*;
-import static com.codeborne.selenide.Selenide.*;
+import static com.codeborne.selenide.Selenide.$;
+import static com.codeborne.selenide.Selenide.open;
+
+
 
 public class BaseSteps {
     private static final String BASE_URL = "https://github.com/";
